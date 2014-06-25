@@ -8,6 +8,7 @@ RUN apt-get install -y less
 RUN apt-get install -y screen
 RUN apt-get install -y sudo
 RUN apt-get install -y vim
+RUN apt-get install -y telnet
 
 RUN adduser deploy
 RUN echo 'deploy ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/deploy-sudo
