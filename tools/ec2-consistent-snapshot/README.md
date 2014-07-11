@@ -13,28 +13,28 @@ How to take an ec2 consistent snapshot of a mongodb database on an amazonaws ubu
 ## 2. Getting Started With Docker
 
 * ssh into the ubuntu instance with the .pem file, your username and public dns
-
-     ssh -i my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com
-
+```
+ssh -i my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com
+```
 * become the root user
-
-     sudo su
-
+```
+sudo su
+```
 * use docker to pull and run the mongodb image
-
-     docker run --name sync_mongo -d mongo
-
+```
+docker run --name sync_mongo -d mongo
+```
 * now run the ec2-consistent-snapshot image and connect it to the mongo container with the following command
-
-     docker run -it -e AWS_ACCESS_KEY_ID=accesskey -e AWS_SECRET_ACCESS_KEY=secretaccesskey --volumes-from sync_mongo --link sync_mongo:mongo synctree/ec2-consistent-snapshot bin/bash 
-
+```
+docker run -it -e AWS_ACCESS_KEY_ID=accesskey -e AWS_SECRET_ACCESS_KEY=secretaccesskey --volumes-from sync_mongo --link sync_mongo:mongo synctree/ec2-consistent-snapshot bin/bash 
+```
 ## 3. Running Ec2 Consistent Snapshot
 
 * run the ec2-consistent-snapshot with the following command
-
-     ec2-consistent-snapshot --mongo --mongo-host $MONGO_PORT_27017_TCP_ADDR --mongo-port $MONGO_PORT_27017_TCP_PORT vol-volumeId
-     result: snap-somenumber
-
+```
+ec2-consistent-snapshot --mongo --mongo-host $MONGO_PORT_27017_TCP_ADDR --mongo-port $MONGO_PORT_27017_TCP_PORT vol-volumeId
+result: snap-somenumber
+```
 ### 4. It should show that a snapshot is being taken on the aws console on the web browser
 
 Thats it! 
