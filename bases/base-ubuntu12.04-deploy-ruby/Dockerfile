@@ -1,4 +1,4 @@
-FROM synctree/ubuntu-12.04-deploy
+FROM synctree/base-ubuntu12.04-deploy
 
 RUN \
   echo "install: --no-rdoc --no-ri" > /home/deploy/.gemrc && \
