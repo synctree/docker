@@ -15,11 +15,10 @@ RUN apt-get update -q && \
 RUN \
   adduser --disabled-password --gecos '' deploy && \
   echo 'deploy ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/deploy-sudo && \
-  chmod 0400 /etc/sudoers.d/deploy-sudo
-
-RUN su - deploy -c 'curl -L https://get.rvm.io | bash -s stable --ruby=2.1.2'
-RUN su - deploy -c '\
+  chmod 0400 /etc/sudoers.d/deploy-sudo && \
   echo "install: --no-rdoc --no-ri" > /home/deploy/.gemrc && \
-  gem install bundler'
+  chown deploy:deploy /home/deploy/.gemrc
+
+RUN su - deploy -c 'curl -L https://get.rvm.io | bash -s stable --ruby=2.1.2 --gems=bundler'
 
 VOLUME /var/log
