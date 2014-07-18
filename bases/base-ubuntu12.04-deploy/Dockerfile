@@ -10,7 +10,8 @@ RUN apt-get update -q && \
   sudo \
   vim \
   telnet \
-  git-core
+  git-core \
+  && apt-get -q clean
 
 RUN \
   adduser --disabled-password --gecos '' deploy && \
