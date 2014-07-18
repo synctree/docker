@@ -11,6 +11,7 @@ RUN apt-get update -q && \
   vim \
   telnet \
   git-core \
+  python-software-properties \
   && apt-get -q clean
 
 RUN \
